@@ -37,7 +37,7 @@ def create_prompt(prompt: Prompt,  db: Session = Depends(get_db)):
     db.add(db_prompt)
     db.commit()
 
-    tools_db = db.query(ToolDB).all()
+    tools_db = db.query(ToolDB).filter(ToolDB.loggedIn == True).all()
 
     # Convert ORM objects to Pydantic models
     tools = [Tool.from_orm(tool) for tool in tools_db]
