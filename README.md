@@ -14,6 +14,13 @@ mkvirtualenv tool-selector
 pip install -r reqs.txt
 ```
 
+Set up your secrets.json
+```sh
+cd backend
+cp secrets.tmpl.json secrets.json
+vim secrets.json # add your openai API key
+```
+
 To run the app:
 
 ```sh
