@@ -1,13 +1,4 @@
-import {
-  Edge,
-  EdgeChange,
-  Node,
-  NodeChange,
-  OnNodesChange,
-  OnEdgesChange,
-  applyNodeChanges,
-  applyEdgeChanges,
-} from "reactflow";
+import { applyNodeChanges, applyEdgeChanges } from "reactflow";
 import { create } from "zustand";
 import { nanoid } from "nanoid";
 
@@ -39,9 +30,16 @@ const useStore = create((set, get) => ({
   toolsData: null,
 
   onNodesChange: (changes) => {
+    // check if changes contain a removal
+    const hasRemoval = changes.find((change) => change.type === "remove");
+
     set({
       nodes: applyNodeChanges(changes, get().nodes),
     });
+
+    if (hasRemoval) {
+      get().relayout();
+    }
   },
   onEdgesChange: (changes) => {
     set({
@@ -54,6 +52,41 @@ const useStore = create((set, get) => ({
     const toolsData = await response.json();
 
     set({ toolsData });
+  },
+  addTool: (tool) => {
+    // check if tool already exists in ReactFlow
+    const toolExists = get().nodes.find(
+      (node) => node.data.label === tool.name
+    );
+    if (toolExists) return;
+
+    const { addChildNode, relayout } = get();
+    addChildNode(get().nodes[0], { x: 0, y: 0 }, tool.name);
+
+    relayout();
+  },
+  relayout: () => {
+    // get root node:
+    const rootNode = get().nodes.find((node) => node.id === "root");
+
+    // get non-root nodes:
+    let nonRootNodes = get().nodes.filter((node) => node.id !== "root");
+
+    // This relayout logic should be refactored to be shared with the logic in sendPrompt. Their use cases are slightly different, but could be joined.
+
+    // reposition n
+    // move y down 300 pixels
+    const newY = 150;
+    const deltaX = 200;
+    const totalWidth = nonRootNodes.length * deltaX;
+    const offsetX = 150;
+    const startX = -totalWidth / 2 + offsetX;
+
+    nonRootNodes = nonRootNodes.map((node, i) => {
+      return { ...node, position: { x: startX + deltaX * i, y: newY } };
+    });
+
+    set({ nodes: [rootNode, ...nonRootNodes] });
   },
   addChildNode: (parentNode, position, label) => {
     const newNode = {
@@ -76,7 +109,6 @@ const useStore = create((set, get) => ({
     });
   },
   sendPrompt: async (prompt) => {
-    console.log("send prompt", prompt);
     set({ loading: true, error: null });
 
     try {

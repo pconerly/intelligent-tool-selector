@@ -20,5 +20,12 @@
   background-color: #61edfa;
   border-radius: 3px;
   border: 2px solid darkslategray;
+}
 
+.add-btn {
+  font-size: 1em;
+  padding: 4px 8px;
+  background-color: #61fa87;
+  border-radius: 3px;
+  border: 2px solid darkslategray;  
 }

@@ -26,10 +26,6 @@ function Flow() {
     shallow
   );
 
-  // should add a container
-  // should add a sidebar with a list of tools
-  // should add a input box for a new prompt
-
   return (
     <ReactFlow
       nodes={nodes}

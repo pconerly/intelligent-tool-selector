@@ -6,11 +6,8 @@ import { shallow } from "zustand/shallow";
 
 import useStore from "../App/store";
 
-// import cn from "classnames";
-// import * as styles from "./ToolsPanel.module.scss";
-// console.log("styles", styles);
-
 const selector = (state) => ({
+  addTool: state.addTool,
   getTools: state.getTools,
   toolsData: state.toolsData,
   loading: state.loading,
@@ -18,7 +15,7 @@ const selector = (state) => ({
 });
 
 export const ToolsPanel = () => {
-  const { getTools, toolsData, loading, sendPrompt } = useStore(
+  const { addTool, getTools, toolsData, loading, sendPrompt } = useStore(
     selector,
     shallow
   );
@@ -33,13 +30,12 @@ export const ToolsPanel = () => {
     const task = event.target.task.value.trim();
     if (task.length < 300) {
       setError(
-        `Please enter a task description at least 300 characters long. Current length: ${task.length}`
+        `The tool selector works best when there's a description 300 characters or longer. Current length: ${task.length}. However the tool is running your query regardless.`
       );
     }
-    sendPrompt(task);
 
-    // Here, you'd typically dispatch an action or make an API call
-    // to get the tools for the given task.
+    // If I was keeping the 300 character limit I would have this in an "else", but I find it useful to send shorter task descriptions.
+    sendPrompt(task);
   };
 
   let extraProps = {};
@@ -81,6 +77,16 @@ export const ToolsPanel = () => {
               <strong>{tool.name}</strong>
               <p>{tool.description}</p>
               <p>Logged in: {tool.loggedIn ? "True" : "False"}</p>
+              {tool.loggedIn && (
+                <button
+                  className="add-btn"
+                  onClick={() => {
+                    addTool(tool);
+                  }}
+                >
+                  Add this tool
+                </button>
+              )}
               <hr />
             </div>
           ))}
