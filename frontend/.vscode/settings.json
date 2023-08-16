@@ -1,0 +1,18 @@
+{
+  "search.exclude": {
+     "**/yarn-error.log": true,
+     "**/yarn.lock": true
+  },
+ "[javascriptreact]": {
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
+ },
+ "[javascript]": {
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
+ },
+ "[json]": {
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
+ }
+}
