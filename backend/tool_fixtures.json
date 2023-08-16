@@ -1,0 +1,72 @@
+[{
+  "name": "Google Docs",
+  "description": "Google Docs is a free, web-based word processor.",
+  "loggedIn": true,
+  "inputParameters": [{
+      "name": "documentName",
+      "value": "string"
+  }, {
+      "name": "content",
+      "value": "string"
+  }]
+},{
+  "name": "Calendar",
+  "description": "Google Calendar is a time-management and scheduling calendar service developed by Google.",
+  "loggedIn": true,
+  "inputParameters": [{
+      "name": "eventName",
+      "value": "string"
+  }, {
+      "name": "eventDate",
+      "value": "date"
+  }]
+}, {
+  "name": "Twitch",
+  "description": "Twitch is a live streaming video platform owned by Twitch Interactive, a subsidiary of Amazon.com.",
+  "loggedIn": true,
+  "inputParameters": [{
+      "name": "channelName",
+      "value": "string"
+  }, {
+      "name": "action",
+      "value": "string"
+  }]
+}, {
+  "name": "Rover.com",
+  "description": "Rover.com is an American company which operates an online marketplace for people to buy and sell pet care services including pet sitting, dog boarding, and dog walking.",
+  "loggedIn": true,
+  "inputParameters": [{
+      "name": "serviceRequest",
+      "value": "string"
+  }, {
+      "name": "date",
+      "value": "date"
+  }]
+}, {
+  "name": "Chewy.com",
+  "description": "Chewy.com is an online retailer of pet food and other pet-related products owned by PetSmart and is based in Dania Beach, Florida.",
+  "loggedIn": false,
+  "inputParameters": [{
+      "name": "serviceRequest",
+      "value": "string"
+  } ]
+}, {
+  "name": "Amazon",
+  "description": "Amazon.com, Inc., is an American multinational technology company based in Seattle, Washington, that focuses on e-commerce, cloud computing, digital streaming, and artificial intelligence.",
+  "loggedIn": false,
+  "inputParameters": [{
+      "name": "serviceRequest",
+      "value": "string"
+  } ]
+}, {
+  "name": "Meowtel",
+  "description": "Meowtel is an online marketplace for people to buy and sell pet care services including pet sitting, cat boarding, and cat walking.",
+  "loggedIn": true,
+  "inputParameters": [{
+      "name": "serviceRequest",
+      "value": "string"
+  }, {
+      "name": "date",
+      "value": "date"
+  }]
+}]
