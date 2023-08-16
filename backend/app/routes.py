@@ -17,7 +17,7 @@ async def root():
 
 @router.get("/tools", response_model=List[Tool])  # Note: You'd need to import List from typing
 def read_tools(db: Session = Depends(get_db)):
-    tools_db = db.query(ToolDB).filter(ToolDB.loggedIn == True).all()
+    tools_db = db.query(ToolDB).all()
     # Convert ORM objects to Pydantic models
     tools = [Tool.from_orm(tool) for tool in tools_db]
     return tools
